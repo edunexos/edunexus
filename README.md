@@ -35,7 +35,7 @@ Laragon automáticamente configurará un host virtual para el proyecto.
 
 Clonar el repositorio:
 
-git clone https://github.com/tu-usuario/edunexus.git
+git clone https://github.com/edunexos/edunexus.git
 cd edunexus
 
 
