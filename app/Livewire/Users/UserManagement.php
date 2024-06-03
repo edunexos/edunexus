@@ -21,16 +21,14 @@ class UserManagement extends Component
 
     protected $queryString = ['search'];
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,{{ $userId }}',
-        'selectedRole' => 'required|string|max:255',
-        'password' => 'nullable|string|min:8|confirmed',
-    ];
-
-    public function mount()
+    protected function rules()
     {
-        // En este caso no es necesario obtener todos los usuarios aquí
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $this->userId,
+            'selectedRole' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ];
     }
 
     public function updatingSearch()

@@ -36,6 +36,10 @@ Route::middleware([
         return view('calendar');
     })->name('calendar');
 
+    //Events
+    Route::get('/events', [EventController::class, 'index']);
+    Route::post('/events', [EventController::class, 'store']);
+
     // Grades
     Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
     Route::get('/grades/{student}', [GradeController::class, 'show'])->name('grades.student');
@@ -50,9 +54,7 @@ Route::middleware([
         return view('support');
     })->name('support');
 
-    //Events
-    Route::get('/events', [EventController::class, 'index']);
-    Route::post('/events', [EventController::class, 'store']);
+
 
     // Piano
     Route::get('/piano', function () {

@@ -4,7 +4,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 {{ auth()->user()->role === 'admin' ? 'md:grid-cols-2' : '' }} gap-6 mb-6">
                 <!-- User Profile -->
                 <div class="bg-green-100 p-4 rounded-lg flex flex-col items-center">
                     <img src="{{ auth()->user()->profile_photo_url }}" alt="User Profile Photo"
@@ -14,13 +14,16 @@
                     <p>{{ auth()->user()->role }}</p>
                 </div>
 
-                <!-- User Management Link -->
-                <div class="bg-blue-100 p-4 rounded-lg text-center">
-                    <p class="text-lg font-medium text-gray-900 mb-2">Manage Users</p>
-                    <a href="{{ route('user-management') }}" class="text-blue-500 hover:underline">Go to User Management</a>
-                    <p class="text-gray-600 mt-2">You can manage all users in the User Management section.</p>
-                </div>
+                @if(auth()->user()->role === 'admin')
+                    <!-- User Management Link -->
+                    <div class="bg-blue-100 p-4 rounded-lg text-center">
+                        <p class="text-lg font-medium text-gray-900 mb-2">Manage Users</p>
+                        <a href="{{ route('user-management') }}" class="text-blue-500 hover:underline">Go to User Management</a>
+                        <p class="text-gray-600 mt-2">You can manage all users in the User Management section.</p>
+                    </div>
+                @endif
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Class Lists -->
                 <div class="col-span-1">
@@ -28,7 +31,7 @@
                         <h3 class="text-lg font-medium text-gray-900 mb-4">Class Lists</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             @foreach ($allCourses as $course)
-                                @if(auth()->user()->role === 'teacher' && $course->teachers->contains(auth()->user()) || auth()->user()->role === 'admin')
+                                @if(auth()->user()->role === 'admin' || (auth()->user()->role === 'teacher' && $course->teachers->contains(auth()->user())) || (auth()->user()->role === 'student' && $course->students->contains(auth()->user())))
                                     <div class="bg-white p-4 rounded-lg shadow-md mb-4">
                                         <h4 class="text-xl font-semibold mb-2 truncate">{{ $course->title }}</h4>
                                         <p class="text-gray-600 mb-4">{{ $course->description }}</p>
@@ -74,7 +77,7 @@
                                 <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01m-6.938 4h6.938M10 16v4m0 0h-1v-4h-1m1-4h.01m-6.938 4h6.938M10 16v4m0 0h-1v-4h-1m1-4h.01m-6.938 4h6.938" />
+                                        d="M13 16h-1v-4h-1m1-4h.01m-6.938 4h6.938M10 16v4m0 0h-1v-4h-1m1-4h.01m-6.938 4h6.938" />
                                 </svg>
                             </div>
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">

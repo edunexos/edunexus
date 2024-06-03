@@ -15,8 +15,8 @@ class EducationalGameSeeder extends Seeder
     {
         DB::table('educational_games')->insert([
             'title' => 'Music Game',
-            'description' => 'A game to learn music notes',
-            'url' => 'http://localhost:5174/',
+            'description' => 'A game to learn music notes with midi piano',
+            'url' => 'piano',
             'subject_area' => 'Music',
         ]);
     }

@@ -13,12 +13,13 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         $courses = [
-            ['title' => 'M3 - Programming', 'description' => 'DAW Programming 2'],
-            ['title' => 'M6 - Web Development in Client Environment', 'description' => 'DAW Web dev client env'],
-            ['title' => 'M7 - Web Development in Server Environment', 'description' => 'DAW Web dev server env'],
-            ['title' => 'M8 - Web Application Deployment', 'description' => 'DAW Web app deploy'],
-            ['title' => 'M9 - Web Interface Design', 'description' => 'DAW Web interface Design'],
+            ['title' => 'Physics', 'description' => 'Study of matter, energy, and the fundamental forces of nature'],
+            ['title' => 'Chemistry', 'description' => 'Study of substances and their interactions'],
+            ['title' => 'Mathematics', 'description' => 'Abstract study of numbers, quantities, and shapes'],
+            ['title' => 'Literature', 'description' => 'Study of written works, including prose, poetry, and drama'],
+            ['title' => 'Biology', 'description' => 'Study of living organisms and their processes'],
         ];
+
 
         foreach ($courses as $course) {
             Course::create($course);
