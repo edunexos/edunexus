@@ -15,6 +15,15 @@
                     </div>
                 </a>
             @endforeach
+			<a href="https://edunexus.alumnes-monlau.com/geo" class="transform hover:scale-105 transition-transform duration-300">
+                    <div class="relative bg-white rounded-lg shadow-lg overflow-hidden h-60 flex flex-col">
+                        <div class="p-6 flex flex-col flex-1">
+                            <h2 class="text-xl font-semibold text-black mb-2 truncate">Geography</h2>
+                            <p class="text-black">Game to learn Geography in an interactive way</p>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-gray-200 via-white to-blue-100 opacity-50"></div>
+                    </div>
+                </a>
         </div>
     </div>
 </div>

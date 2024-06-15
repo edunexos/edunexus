@@ -8,17 +8,22 @@
                 {
                     'bg-gray-200': !pressedKeys.includes(note),
                     'bg-gray-400': pressedKeys.includes(note),
-                }
-            ]" @mousedown="handleTileClick(note)" @mouseup="handleTileRelease(note)">
+                    'pressed': pressedKeys.includes(note),
+                },
+            ]" @mousedown="handleTileClick(note)" @mouseup="handleTileRelease(note)"
+                @mouseleave="handleTileRelease(note)">
                 {{ note }}
             </div>
         </div>
-        <select class="appearance-none border border-gray-300 rounded-md p-8 pr-10 shadow-sm mb-4"
-            @change="e => composition = e.target.value">
+        <select class="appearance-none border border-gray-300 rounded-md p-2 pr-10 shadow-sm mb-4 select-wide"
+            @change="e => setComposition(e.target.value)">
+            <option value="">Select Song</option>
             <option value="odeToJoy">Ode to Joy</option>
             <option value="up">Up</option>
         </select>
-        <p class="mb-4">Follow the following music sequence: {{ sequences[composition].split('').join(' ') }}</p>
+        <p class="mb-4">
+            Follow the following music sequence: {{ sequences[composition]?.split('').join(' ') }}
+        </p>
         <p class="mb-4">These are your inputs: {{ sheetMusic.split('').join(' ') }}</p>
         <button @click="checkSheetMusic" class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 mb-4">
             Check
@@ -41,8 +46,7 @@ export default {
             sheetMusic: '',
             isCorrect: null,
             pressedKeys: [],
-            composition: 'odeToJoy',
-            showSequence: true,
+            composition: '',
             notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
             sequences: {
                 odeToJoy: 'EEFGGFEDCCDEEDDDEEFGGFEDCCDEDCC',
@@ -63,6 +67,7 @@ export default {
         handleTileClick(note) {
             this.sheetMusic += note;
             if (this.noteSounds[note]) {
+                this.noteSounds[note].currentTime = 0;
                 this.noteSounds[note].play();
             }
             if (!this.pressedKeys.includes(note)) {
@@ -79,14 +84,8 @@ export default {
             this.sheetMusic = '';
             this.isCorrect = null;
             this.pressedKeys = [];
-            this.showSequence = true;
-            setTimeout(() => {
-                this.showSequence = false;
-            }, 3000);
         },
-    },
-    mounted() {
-        const handleKeyDown = (event) => {
+        handleKeyDown(event) {
             const keyMappings = {
                 Digit1: 'C',
                 Digit2: 'D',
@@ -100,8 +99,8 @@ export default {
             if (pressedKey && !this.pressedKeys.includes(pressedKey)) {
                 this.handleTileClick(pressedKey);
             }
-        };
-        const handleKeyUp = (event) => {
+        },
+        handleKeyUp(event) {
             const keyMappings = {
                 Digit1: 'C',
                 Digit2: 'D',
@@ -115,13 +114,35 @@ export default {
             if (releasedKey) {
                 this.handleTileRelease(releasedKey);
             }
-        };
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
-        this.$on('hook:beforeDestroy', () => {
-            document.removeEventListener('keydown', handleKeyDown);
-            document.removeEventListener('keyup', handleKeyUp);
-        });
+        },
+        setComposition(value) {
+            this.composition = value;
+            if (value) {
+                this.showDemo();
+            }
+        },
+        showDemo() {
+            this.resetGame();
+            const sequence = this.sequences[this.composition];
+            let delay = 0;
+            sequence.split('').forEach((note, index) => {
+                setTimeout(() => {
+                    this.handleTileClick(note);
+                    setTimeout(() => {
+                        this.handleTileRelease(note);
+                    }, 500);
+                }, delay);
+                delay += 600;
+            });
+        },
+    },
+    mounted() {
+        document.addEventListener('keydown', this.handleKeyDown);
+        document.addEventListener('keyup', this.handleKeyUp);
+    },
+    beforeUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown);
+        document.removeEventListener('keyup', this.handleKeyUp);
     },
 };
 </script>
@@ -155,4 +176,7 @@ export default {
     background-color: #f3f4f6;
 }
 
+.select-wide {
+    width: 20rem;
+}
 </style>
