@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import GeoGame from "./components/GeoGame";
 import axios from "axios";
-import "./App.css";
 import worldData from "./data/world.json";
+import "./App.css";
 
 const GeoGuesser = () => {
     const [score, setScore] = useState(0);
