@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 const GeoGame = ({ onCountryClick, guessedCountry }) => {
     if (!worldData || !worldData.features) {
-        console.error("world.json no se ha cargado correctamente o no tiene la estructura correcta.");
-        return <div>Error al cargar el mapa.</div>;
+        console.error("world.json was not loaded correctly or has an incorrect structure.");
+        return <div>Error loading the map.</div>;
     }
 
     return (

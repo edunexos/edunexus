@@ -25,8 +25,9 @@ const GeoGuesser = () => {
 
     useEffect(() => {
         if (rounds === 5) {
-            alert("Has jugado 5 rondas, fin del juego");
+            alert("You have played yours rounds, game over. Restarting the game...");
             setGameOver(true);
+            resetGame();
         }
     }, [rounds]);
 
@@ -44,7 +45,7 @@ const GeoGuesser = () => {
 
     const onCountryClick = (country) => {
         if (randomCountry === country) {
-            console.log("Correcto");
+            console.log("Correct");
             setScore(score + 1);
             setRounds(rounds + 1);
             setGuessedCountry([...guessedCountry, country]);
@@ -78,6 +79,14 @@ const GeoGuesser = () => {
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const resetGame = () => {
+        setScore(0);
+        setRounds(0);
+        setGuessedCountry([]);
+        setGameOver(false);
+        generateRandomCountry();
     };
 
     return (
