@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GeoGame from "./components/GeoGame";
 import axios from "axios";
+import Swal from "sweetalert2";
 import worldData from "./data/world.json";
 import "./App.css";
 
@@ -25,9 +26,15 @@ const GeoGuesser = () => {
 
     useEffect(() => {
         if (rounds === 5) {
-            alert("You have played yours rounds, game over. Restarting the game...");
-            setGameOver(true);
-            resetGame();
+            Swal.fire({
+                title: 'Game Over!',
+                text: `Game over! You have completed all your rounds. Your final score is ${score}. Click 'Restart' to play again.`,
+                icon: 'info',
+                confirmButtonText: 'Restart'
+            }).then(() => {
+                setGameOver(true);
+                resetGame();
+            });
         }
     }, [rounds]);
 
