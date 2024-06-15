@@ -15,7 +15,7 @@
             </transition-group>
             <div class="flex justify-between w-full mt-4">
                 <button @click="prevPage" :disabled="currentPage === 1"
-                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 disabled:opacity-50">Previous</button>
+                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 disabled:opacity-50"> < </button>
                 <div class="flex space-x-2">
                     <button v-for="page in totalPages" :key="page" @click="goToPage(page)"
                         :class="['px-3 py-1 rounded', currentPage === page ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700']">
@@ -23,9 +23,9 @@
                     </button>
                 </div>
                 <button @click="nextPage" :disabled="currentPage === totalPages"
-                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 disabled:opacity-50">Next</button>
+                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 disabled:opacity-50"> > </button>
             </div>
-            <div class="flex justify-center w-full mt-4">
+            <div class="flex justify-end w-full mt-4">
                 <button @click="submitQuiz"
                     class="bg-green-800 text-white px-4 py-2 rounded shadow-lg hover:bg-green-900">Submit Quiz</button>
             </div>
