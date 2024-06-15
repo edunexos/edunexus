@@ -1,0 +1,52 @@
+[
+    {
+        "question": "Who wrote the play 'Romeo and Juliet'?",
+        "options": ["William Shakespeare", "Charles Dickens", "Mark Twain", "Jane Austen"],
+        "answer": "William Shakespeare"
+    },
+    {
+        "question": "Who was the ruler of the Roman Empire at its peak?",
+        "options": ["Julius Caesar", "Augustus", "Nero", "Marcus Aurelius"],
+        "answer": "Augustus"
+    },
+    {
+        "question": "What was the main architectural style of the Middle Ages?",
+        "options": ["Romanesque", "Gothic", "Baroque", "Renaissance"],
+        "answer": "Gothic"
+    },
+    {
+        "question": "Who painted the Mona Lisa?",
+        "options": ["Leonardo da Vinci", "Michelangelo", "Raphael", "Donatello"],
+        "answer": "Leonardo da Vinci"
+    },
+    {
+        "question": "What event started World War I?",
+        "options": ["Assassination of Archduke Franz Ferdinand", "Invasion of Poland", "Attack on Pearl Harbor", "Sinking of the Lusitania"],
+        "answer": "Assassination of Archduke Franz Ferdinand"
+    },
+    {
+        "question": "Which period is known as the Age of Enlightenment?",
+        "options": ["16th century", "17th century", "18th century", "19th century"],
+        "answer": "18th century"
+    },
+    {
+        "question": "Who was the leader of the Soviet Union during World War II?",
+        "options": ["Vladimir Lenin", "Joseph Stalin", "Leon Trotsky", "Nikita Khrushchev"],
+        "answer": "Joseph Stalin"
+    },
+    {
+        "question": "Who developed the theory of relativity?",
+        "options": ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"],
+        "answer": "Albert Einstein"
+    },
+    {
+        "question": "Who was the first man to step on the moon?",
+        "options": ["Yuri Gagarin", "Buzz Aldrin", "Neil Armstrong", "Michael Collins"],
+        "answer": "Neil Armstrong"
+    },
+    {
+        "question": "What was the primary cause of the French Revolution?",
+        "options": ["Monarchy", "Economic Crisis", "Foreign Invasion", "Religious Conflict"],
+        "answer": "Economic Crisis"
+    }
+]
