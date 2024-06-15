@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <div id="react-app"></div>
-                <script type="module" src="{{ asset('react-app/assets/assets/index-C4mj_EoJ.js') }}"></script>
+                <script type="module" src="{{ asset('react-app/assets/assets/index-CTTmI3ed.js') }}"></script>
                 <link rel="stylesheet" href="{{ asset('react-app/assets/assets/index-SLr2xUag.css') }}">
             </div>
         </div>

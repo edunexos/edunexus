@@ -10,6 +10,7 @@ const GeoGuesser = () => {
     const [randomCountry, setRandomCountry] = useState("");
     const [guessedCountry, setGuessedCountry] = useState([]);
     const [attempts, setAttempts] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [rounds, setRounds] = useState(0);
 
@@ -28,7 +29,7 @@ const GeoGuesser = () => {
         if (rounds === 5) {
             Swal.fire({
                 title: 'Game Over!',
-                text: `Game over! You have completed all your rounds. Your final score is ${score}. Click 'Restart' to play again.`,
+                text: `Game over! Your final score is ${score} with a total of ${totalAttempts} attempts. Click 'Restart' to play again.`,
                 icon: 'info',
                 confirmButtonText: 'Restart'
             }).then(() => {
@@ -51,6 +52,7 @@ const GeoGuesser = () => {
     };
 
     const onCountryClick = (country) => {
+        setTotalAttempts(totalAttempts + 1);
         if (randomCountry === country) {
             console.log("Correct");
             setScore(score + 1);
@@ -92,6 +94,7 @@ const GeoGuesser = () => {
         setScore(0);
         setRounds(0);
         setGuessedCountry([]);
+        setTotalAttempts(0);
         setGameOver(false);
         generateRandomCountry();
     };
