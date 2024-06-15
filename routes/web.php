@@ -75,4 +75,10 @@ Route::middleware([
     Route::get('/quiz', function () {
         return view('quiz');
     })->name('quiz');
+
+    // geography
+    Route::get('/geography', function () {
+        return view('geography');
+    })->name('geography');
 });
+
