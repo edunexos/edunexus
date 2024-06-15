@@ -1,8 +1,5 @@
 <template>
-    <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-        <h1 class="text-4xl font-bold mb-4">History Quiz</h1>
-        <p class="text-xl mb-4">Answer the questions below:</p>
-
+    <div class="flex flex-col items-center justify-center bg-gray-100 p-4">
         <div v-if="!quizOver" class="w-full max-w-3xl">
             <transition-group name="fade" tag="div">
                 <div v-for="(question, index) in paginatedQuestions" :key="index" class="mb-6">
