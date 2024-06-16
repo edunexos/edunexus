@@ -61,11 +61,14 @@ export default {
                 A: new Audio('/sounds/la.wav'),
                 B: new Audio('/sounds/si.wav'),
             },
+            isDemoPlaying: false
         };
     },
     methods: {
         handleTileClick(note) {
-            this.sheetMusic += note;
+            if (!this.isDemoPlaying) {
+                this.sheetMusic += note;
+            }
             if (this.noteSounds[note]) {
                 this.noteSounds[note].currentTime = 0;
                 this.noteSounds[note].play();
@@ -123,6 +126,7 @@ export default {
         },
         showDemo() {
             this.resetGame();
+            this.isDemoPlaying = true;
             const sequence = this.sequences[this.composition];
             let delay = 0;
             sequence.split('').forEach((note, index) => {
@@ -130,6 +134,9 @@ export default {
                     this.handleTileClick(note);
                     setTimeout(() => {
                         this.handleTileRelease(note);
+                        if (index === sequence.length - 1) {
+                            this.isDemoPlaying = false;
+                        }
                     }, 500);
                 }, delay);
                 delay += 600;
