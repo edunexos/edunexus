@@ -10,6 +10,7 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
     name: 'CalendarComponent',
@@ -24,26 +25,52 @@ export default {
             editable: true,
             selectable: true,
             dateClick: async (info) => {
-                const title = prompt('Enter Event Title:');
-                if (title) {
-                    try {
-                        const response = await axios.post('/events', {
-                            title: title,
-                            start_date: info.dateStr,
-                            end_date: info.dateStr
-                        });
-                        calendarEvents.value.push({
-                            title: response.data.title,
-                            start: response.data.start_date,
-                            end: response.data.end_date
-                        });
-                    } catch (error) {
-                        console.error('Error creating event:', error);
+                Swal.fire({
+                    title: 'Enter Event Title',
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonText: 'Create',
+                    cancelButtonText: 'Cancel'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        const title = result.value;
+                        if (title) {
+                            try {
+                                const response = await axios.post('/events', {
+                                    title: title,
+                                    start_date: info.dateStr,
+                                    end_date: info.dateStr
+                                });
+                                calendarEvents.value.push({
+                                    title: response.data.title,
+                                    start: response.data.start_date,
+                                    end: response.data.end_date
+                                });
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Event Created',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } catch (error) {
+                                console.error('Error creating event:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'There was an error creating the event.'
+                                });
+                            }
+                        }
                     }
-                }
+                });
             },
             eventClick: (info) => {
-                alert('Event: ' + info.event.title);
+                Swal.fire({
+                    title: 'Event Details',
+                    text: 'Event: ' + info.event.title,
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                });
             },
         });
 
@@ -55,7 +82,7 @@ export default {
                     start: event.start_date,
                     end: event.end_date
                 }));
-                calendarOptions.value.events = calendarEvents.value; // Ensure events are set in calendarOptions
+                calendarOptions.value.events = calendarEvents.value;
             } catch (error) {
                 console.error('Error loading events:', error);
             }
