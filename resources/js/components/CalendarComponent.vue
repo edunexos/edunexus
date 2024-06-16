@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -27,9 +27,10 @@ export default {
                 const title = prompt('Enter Event Title:');
                 if (title) {
                     try {
-                        const response = await axios.post('/api/events', {
+                        const response = await axios.post('/events', {
                             title: title,
                             start_date: info.dateStr,
+                            end_date: info.dateStr
                         });
                         calendarEvents.value.push({
                             title: response.data.title,
@@ -48,18 +49,23 @@ export default {
 
         const loadEvents = async () => {
             try {
-                const response = await axios.get('/api/events');
+                const response = await axios.get('/events');
                 calendarEvents.value = response.data.map(event => ({
                     title: event.title,
                     start: event.start_date,
                     end: event.end_date
                 }));
+                calendarOptions.value.events = calendarEvents.value; // Ensure events are set in calendarOptions
             } catch (error) {
                 console.error('Error loading events:', error);
             }
         };
 
         onMounted(loadEvents);
+
+        watch(calendarEvents, (newEvents) => {
+            calendarOptions.value.events = newEvents;
+        }, { immediate: true });
 
         return {
             calendarEvents,
