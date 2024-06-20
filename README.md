@@ -121,8 +121,11 @@ database: Contiene las migraciones y semillas de la base de datos.
 app: Contiene los controladores, modelos y otros archivos de la lógica de la aplicación.
 
 Test users:
+
 admin@edunexus => admin123
+
 robertomanca@edunexus => 12345678
+
 student@edunexus => student123
 
 
