@@ -120,5 +120,10 @@ public: Contiene los archivos públicos como imágenes, CSS y JS compilados.
 database: Contiene las migraciones y semillas de la base de datos.
 app: Contiene los controladores, modelos y otros archivos de la lógica de la aplicación.
 
+Test users:
+admin@edunexus => admin123
+robertomanca@edunexus => 12345678
+student@edunexus => student123
+
 
 Licencia: proyecto licenciado bajo la Licencia BY-NC-ND Reconocimiento-NoComercial-SinObraDerivada 3.0 . 
